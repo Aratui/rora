@@ -1,0 +1,5 @@
+Para gerar o .jar sem instalar nada:
+1. Crie um repositório no GitHub e envie o conteúdo desta pasta.
+2. Aba Actions > build > Artifacts > aurora-jar.
+3. Coloque o .jar em mods/ junto com o Fabric API (Minecraft 1.21/1.21.1).
+Ou localmente: gradle build (Java 21).
