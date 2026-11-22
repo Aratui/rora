@@ -1,0 +1,4 @@
+{"providers":[
+ {"type":"ttf","file":"aurora:tektur.ttf","shift":[0.0,0.0],"size":9.5,"oversample":8.0},
+ {"type":"reference","id":"minecraft:include/default"}
+]}
