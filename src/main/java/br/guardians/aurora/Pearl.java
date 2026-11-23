@@ -92,12 +92,12 @@ public enum Pearl {
         Skill.s(1, "Poeira de Fada", "Cura 6 de vida, queda suave e um pouco de velocidade.", (p, w, l) -> {
             p.heal(6); Fx.eff(p, SLOW_FALLING, 200, 0); Fx.eff(p, SPEED, 120, 0); }),
         Skill.s(3, "Pequena Fada", "Você fica minúsculo por 20s: muito rápido e pula alto.", (p, w, l) -> {
-            Forms.start(p, "small", 400);
+            Morph.small(p, 400);
             Fx.eff(p, SPEED, 400, 2); Fx.eff(p, JUMP_BOOST, 400, 1); Fx.eff(p, SLOW_FALLING, 400, 0); }),
         Skill.s(5, "Voo Encantado", "Você sobe no ar por 2 segundos e depois cai devagar.", (p, w, l) -> {
             Fx.eff(p, LEVITATION, 40, 1); Fx.eff(p, SLOW_FALLING, 300, 0); }),
         Skill.s(7, "Gigante", "Você vira um gigante por 15s: força e resistência.", (p, w, l) -> {
-            Forms.start(p, "giant", 300);
+            Morph.big(p, 300);
             Fx.eff(p, STRENGTH, 300, 1); Fx.eff(p, RESISTANCE, 300, 1); }),
         Skill.s(10, "Encanto", "Revela e enfraquece inimigos a 8 blocos; você regenera.", (p, w, l) -> {
             for (LivingEntity e : Fx.near(p, 8)) {
@@ -148,11 +148,8 @@ public enum Pearl {
             for (LivingEntity e : Fx.nearest(p, 4, 1)) { Fx.hurt(w, p, e, 5); p.heal(5); } }),
         Skill.s(4, "Névoa Carmesim", "Invisibilidade total (esconde armadura e itens), velocidade e visão noturna.", (p, w, l) -> {
             Stealth.start(p, 100); Fx.eff(p, SPEED, 160, 1); Fx.eff(p, NIGHT_VISION, 300, 0); }),
-        Skill.s(6, "Forma de Morcego", "Vira um morcego por 10s: você voa, fica pequeno e invisível.", (p, w, l) -> {
+        Skill.s(6, "Forma de Morcego", "Vira um morcego por 10s: você voa, fica pequeno e invisível (sem armadura e itens à mostra).", (p, w, l) -> {
             Morph.bat(p, 200); Fx.eff(p, NIGHT_VISION, 200, 0); }),
-        Skill.s(6, "Forma de Morcego", "Vira um morcego por 15s: pequeno, voando, veloz e com visão noturna.", (p, w, l) -> {
-            Forms.start(p, "bat", 300);
-            Fx.eff(p, SPEED, 300, 1); Fx.eff(p, NIGHT_VISION, 300, 0); }),
         Skill.s(8, "Banquete de Sangue", "Fere todos a 7 blocos e cura você por inimigo atingido.", (p, w, l) -> {
             for (LivingEntity e : Fx.near(p, 7)) { Fx.hurt(w, p, e, 4); p.heal(4); }
             Fx.eff(p, STRENGTH, 200, 0); }));

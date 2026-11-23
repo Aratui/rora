@@ -14,6 +14,7 @@ public class AuroraData {
     public static class Info {
         public String faction = "", team = "", god = "";
         public int level = 1;
+        public int xp = 0;
     }
 
     static class Save {

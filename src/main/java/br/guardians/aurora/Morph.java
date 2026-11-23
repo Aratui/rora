@@ -62,7 +62,7 @@ public class Morph {
     public static void bat(ServerPlayerEntity p, int ticks) {
         begin(p, "bat", ticks);
         setScale(p, 0.3);
-        p.addStatusEffect(new StatusEffectInstance(StatusEffects.INVISIBILITY, ticks, 0, false, false, false));
+        Stealth.start(p, ticks);
         p.getAbilities().allowFlying = true;
         p.getAbilities().flying = true;
         p.getAbilities().setFlySpeed(0.08f);
@@ -74,6 +74,7 @@ public class Morph {
         if (st.bat != null) st.bat.discard();
         if (st.type.equals("bat")) {
             p.removeStatusEffect(StatusEffects.INVISIBILITY);
+            Stealth.end(p);
             GameMode gm = p.interactionManager.getGameMode();
             if (!gm.isCreative() && gm != GameMode.SPECTATOR) {
                 p.getAbilities().allowFlying = false;

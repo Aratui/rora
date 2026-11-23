@@ -48,6 +48,8 @@ public class AuroraCast {
             ItemStack st = p.getInventory().getStack(k);
             if (st.getItem() instanceof AuroraItems.PearlItem pi) return pi.pearl;
         }
+        ItemStack slot = AccessoriesCompat.firstPearl(p);
+        if (slot != null && slot.getItem() instanceof AuroraItems.PearlItem pi) return pi.pearl;
         return null;
     }
 
@@ -114,6 +116,8 @@ public class AuroraCast {
         Skill.castOne(s, p, (ServerWorld) p.getWorld(), i.level, g.fx);
         int cd = Math.max(60, 80 + s.level() * 30 - (i.level - s.level()) * 5);
         start(p, cdKey, cd, s.name());
+        AuroraEvents.markCast(p, 100);
+        AuroraEvents.addXp(p, 2);
         syncSel(p);
         return cd;
     }
@@ -127,6 +131,8 @@ public class AuroraCast {
         Skill.castOne(s, p, (ServerWorld) p.getWorld(), lvl, pr.fx);
         int cd = Math.max(60, (int) (pr.cooldown * (0.5 + 0.1 * s.level())) - (lvl - s.level()) * 10);
         start(p, cdKey, cd, s.name());
+        AuroraEvents.markCast(p, 100);
+        AuroraEvents.addXp(p, 2);
         syncSel(p);
         return cd;
     }

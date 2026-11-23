@@ -39,7 +39,7 @@ public class AuroraCommands {
     public static void register() {
         CommandRegistrationCallback.EVENT.register((d, reg, env) -> d.register(
             literal("aurora").executes(c -> {
-                msg(c, "Aurora: /aurora info | skills | score | faction join <nome> | god set | team set | level set/add | pearl give | essence give <deus>");
+                msg(c, "Aurora: /aurora info | skills | score | faction join <nome> | god set | team set | level set/add | xp add | pearl give | essence give <deus>");
                 return 1;
             })
                 // ---- facções (S1) ----
@@ -109,6 +109,16 @@ public class AuroraCommands {
                             return 1;
                         })))))
                 // ---- itens ----
+                .then(literal("xp").requires(AuroraCommands::admin)
+                    .then(literal("add").then(argument("players", EntityArgumentType.players())
+                        .then(argument("n", IntegerArgumentType.integer(1, 5000)).executes(c -> {
+                            int n = IntegerArgumentType.getInteger(c, "n");
+                            for (ServerPlayerEntity p : EntityArgumentType.getPlayers(c, "players"))
+                                AuroraEvents.addXp(p, n);
+                            AuroraData.save(c.getSource().getServer());
+                            msg(c, "XP adicionado: " + n);
+                            return 1;
+                        })))))
                 .then(literal("pearl").requires(AuroraCommands::admin)
                     .then(literal("give").then(argument("players", EntityArgumentType.players())
                         .then(word("perola", PEARLS).executes(c -> {

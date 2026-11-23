@@ -1,0 +1,33 @@
+{
+  "replace": false,
+  "values": [
+    "aurora:essence_apollo",
+    "aurora:essence_ares",
+    "aurora:essence_artemis",
+    "aurora:essence_athena",
+    "aurora:essence_demeter",
+    "aurora:essence_dionisio",
+    "aurora:essence_hades",
+    "aurora:essence_hefesto",
+    "aurora:essence_hera",
+    "aurora:essence_hermes",
+    "aurora:essence_poseidon",
+    "aurora:essence_zeus",
+    "aurora:pearl_alma",
+    "aurora:pearl_dragao",
+    "aurora:pearl_fada",
+    "aurora:pearl_fenix",
+    "aurora:pearl_gelo",
+    "aurora:pearl_ignis",
+    "aurora:pearl_kraken",
+    "aurora:pearl_luz",
+    "aurora:pearl_mare",
+    "aurora:pearl_medusa",
+    "aurora:pearl_sombra",
+    "aurora:pearl_tempo",
+    "aurora:pearl_terra",
+    "aurora:pearl_trovao",
+    "aurora:pearl_vampiro",
+    "aurora:pearl_zefiro"
+  ]
+}

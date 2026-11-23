@@ -41,7 +41,7 @@ public class AuroraItems {
             t.add(Text.literal(" Nv." + s.level() + " ").formatted(Formatting.GRAY)
                     .append(Text.literal(s.name()).setStyle(Style.EMPTY.withFont(Palette.SKILL).withColor(col)))
                     .append(Text.literal(": " + s.desc()).formatted(Formatting.WHITE)));
-        t.add(Text.literal("Matar um jogador: +1 nível. Morrer: -1 nível.").formatted(Formatting.DARK_GRAY));
+        t.add(Text.literal("Nível: +1 ao matar jogador; XP matando monstros, usando poderes e com o tempo. Morrer: -1 nível.").formatted(Formatting.DARK_GRAY));
     }
 
     public static class PearlItem extends Item {
@@ -53,7 +53,7 @@ public class AuroraItems {
 
         @Override
         public void appendTooltip(ItemStack stack, Item.TooltipContext ctx, List<Text> t, TooltipType type) {
-            tip(t, pearl.desc, "Clique direito ou G usa a habilidade selecionada; B troca de habilidade. Cada uma tem sua recarga.", pearl.skills, "pearl_" + pearl.key, pearl.key);
+            tip(t, pearl.desc, "Clique direito ou G usa a habilidade selecionada; B troca de habilidade. Pode ficar guardada no slot charm (Accessories/Curios).", pearl.skills, "pearl_" + pearl.key, pearl.key);
         }
 
         @Override

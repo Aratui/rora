@@ -26,6 +26,7 @@ public class AuroraClient implements ClientModInitializer {
     static final Map<String, CdEntry> CDS = new LinkedHashMap<>();
     static final Map<String, String> SEL = new LinkedHashMap<>();
     static StatusPayload status;
+    static XpPayload xpInfo = new XpPayload(0, 0);
     static int lastLevel = -1;
     static long flashUntil;
     static long tick;
@@ -48,6 +49,7 @@ public class AuroraClient implements ClientModInitializer {
             else SEL.put(payload.key(), payload.text());
         });
 
+        ClientPlayNetworking.registerGlobalReceiver(XpPayload.ID, (payload, ctx) -> xpInfo = payload);
         ClientPlayNetworking.registerGlobalReceiver(StatusPayload.ID, (payload, ctx) -> {
             if (lastLevel != -1 && payload.level() > lastLevel) flashUntil = tick + 40;
             lastLevel = payload.level();
@@ -132,7 +134,7 @@ public class AuroraClient implements ClientModInitializer {
 
         God god = God.byKey(s.god());
         int rows = (hasTeam ? 1 : 0) + (hasFac ? 1 : 0);
-        int x0 = 6, y0 = 6, w = 122, h = 36 + rows * 11;
+        int x0 = 6, y0 = 6, w = 122, h = 41 + rows * 11;
         int accent = hasTeam ? teamColor(s.team()) : (god != null ? Palette.color("essence_" + god.key) : 0xFFD34D);
         boolean flash = tick < flashUntil && (tick / 4) % 2 == 0;
         int border = flash ? 0xFFFFFFFF : (0xFF000000 | accent);
@@ -160,7 +162,15 @@ public class AuroraClient implements ClientModInitializer {
             if (on) g.fill(sx, y0 + 28, sx + 10, y0 + 29, 0x66FFFFFF);
         }
 
-        int y = y0 + 36;
+        // barra fina de XP para o próximo nível
+        if (!max && xpInfo.need() > 0) {
+            int fw = (int) (110.0 * Math.min(1.0, (double) xpInfo.xp() / xpInfo.need()));
+            g.fill(x0 + 4, y0 + 34, x0 + 114, y0 + 36, 0xFF2A2A34);
+            g.fill(x0 + 4, y0 + 34, x0 + 4 + fw, y0 + 36, 0xFF000000 | accent);
+            String xt = xpInfo.xp() + "/" + xpInfo.need() + " XP";
+            g.drawTextWithShadow(mc.textRenderer, xt, x0 + w - 4 - mc.textRenderer.getWidth(xt), y0 + 17, 0xBBBBBB);
+        }
+        int y = y0 + 41;
         if (hasTeam) {
             g.fill(x0 + 4, y + 1, x0 + 8, y + 8, 0xFF000000 | teamColor(s.team()));
             g.drawTextWithShadow(mc.textRenderer, s.team().toUpperCase() + " · " + s.teamPts() + " pts",
